@@ -10,6 +10,7 @@ const Header = () => {
                 <Button component={Link} to='/'>Home page</Button>
                 <Button onClick={() => console.log('bills')}>Bills</Button>
                 <Button component={Link} to='/members'>Members</Button>
+                <Button component={Link} to='/committees'>Committees</Button>
             </div>
         </div>
     )
