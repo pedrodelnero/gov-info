@@ -1,12 +1,13 @@
 import axios from "axios";
 
 
-const API_KEY = "";
+const API_KEY = process.env.REACT_APP_API_KEY
 
 
 export const getAllMembers = async (congress, chamber) => {
      const { data: { results }} = await axios.get(`https://api.propublica.org/congress/v1/${congress}/${chamber}/members.json`, {
         headers: {
+            // "X-API-Key": 'YdLNzDQVvzb6tqpDgMLrqOcxVBQWwySSLc2kKAcn'
             "X-API-Key": API_KEY
         }
     })
@@ -39,15 +40,4 @@ export const getOneCongressMemberExpenses = async (memberID, year, quarter) => {
         }
     })
     return results
-}
-
-// Bills
-
-export const getSpecificBill = async (congress, billId) => {
-    const { data: { results } } = await axios.get(`https://api.propublica.org/congress/v1/${congress}/bills/${billId}.json`, {
-       headers: {
-           "X-API-Key": API_KEY
-       }
-   })
-   return results[0]
 }

@@ -10,7 +10,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
 
-import { getOneCongressMember, getOneCongressMemberExpenses } from '../../api/api';
+import { getOneCongressMember, getOneCongressMemberExpenses } from '../../api/membersAPI';
 import Congress from './Congress/Congress';
 import Bills from './Bills/Bills';
 import MemberExpenses from './MemberExpenses/MemberExpenses';

@@ -7,7 +7,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
 
-import { getBillCosponsoredByOneMember } from '../../../api/api';
+import { getBillCosponsoredByOneMember } from '../../../api/membersAPI';
 import Bill from './Bill/Bill';
 
 

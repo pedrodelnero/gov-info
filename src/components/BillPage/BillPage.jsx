@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import Carousel from 'react-material-ui-carousel'
 
-import { getSpecificBill } from '../../api/api'
+import { getSpecificBill } from '../../api/billsAPI'
 
 
 const BillPage = () => {

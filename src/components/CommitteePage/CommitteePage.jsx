@@ -10,7 +10,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
 
-import { getSpecificCommittee } from '../../api/committees/committeesAPI';
+import { getSpecificCommittee } from '../../api/committeesAPI';
 import Subcommittee from './Subcommittee/Subcommittee';
 import Member from './Member/Member';
 
