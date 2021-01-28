@@ -11,10 +11,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Header />
-        <div style={{
-          minHeight: '100vh',
-          // margin: theme.spacing(0, 1, 5, 1),
-        }}>
+        <div style={{ minHeight: '100vh' }}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/members/:chamber" component={Members} />
