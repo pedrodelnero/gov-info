@@ -7,26 +7,35 @@ export default makeStyles((theme) => ({
         // boxSizing: 'border-box',
         justifyContent: 'space-between',
         marginBottom: theme.spacing(2),
+        
         border: '1px solid red',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center',
+        }, 
     },
     navItem: {
         margin: '0 8px',
-        // border: '1px solid green'
     },
     navButtonGroup: {
         display: 'flex',
         justifyItems: 'space-between',
-        // padding: '10px',
-        border: '2px solid blue',
-        // boxSizing: 'border-box',
         [theme.breakpoints.down('xs')]: {
             display: 'none',
         }, 
     },
-    subMenu: {
+    popper: {
         position: 'absolute',
         display: 'flex',
         flexDirection: 'column',
-        border: '1px solid red'
+        borderRadius: '20px'
+        // border: '1px solid red'
+    },
+    subMenu: {
+        display: 'flex',
+        flexDirection: 'column',
+        minWidth: '150px',
+        margin: theme.spacing(0.3),
+        borderRadius: '10px'
+        // border: '1px solid red'
     }
 }));

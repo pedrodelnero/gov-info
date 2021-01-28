@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Committee from './Committee/Committee';
 import Subcommittee from './Subcommittee/Subcommittee';
+import useStyles from './styles.js';
 
 
 const Congress = ({ congress, congressNumber }) => {
-    const [committees, setCommittees] = useState([])
-    const [subcommittees, setSubcommittees] = useState([])
-    const [totalVotes, setTotalVotes] = useState(null)
-    const [missedVotes, setMiseedVotes] = useState(null)
-    const [chamber, setChamber] = useState(null)
+    const classes = useStyles();
+    const [committees, setCommittees] = useState([]);
+    const [subcommittees, setSubcommittees] = useState([]);
+    const [totalVotes, setTotalVotes] = useState(null);
+    const [missedVotes, setMiseedVotes] = useState(null);
+    const [chamber, setChamber] = useState(null);
 
     useEffect(() => {
         const selectedCongress = congress.filter((role) => role.congress === congressNumber)
@@ -34,7 +37,7 @@ const Congress = ({ congress, congressNumber }) => {
     <div>
         <Typography variant='h5'>{congress.chamber}</Typography>
         <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
                 <Typography>Member Votes</Typography>
             </AccordionSummary>
             <AccordionDetails >
@@ -44,15 +47,15 @@ const Congress = ({ congress, congressNumber }) => {
                 </div>
             </AccordionDetails>
         </Accordion>
-        <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" >
-                <Typography>Committees</Typography>
+        <Accordion className={classes.accordion} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
+                <Typography >Committees</Typography>
             </AccordionSummary>
             <AccordionDetails >
                 {(committees.length === 0) ? (
                     <Typography>No Committess</Typography>
                 ) : (
-                    <Carousel>
+                    <Carousel className={classes.carousel} >
                         {committees.map((committee, index) => (
                                 <Committee key={index} committee={committee} chamber={chamber} congress={congressNumber} />
                         ))}
@@ -61,14 +64,14 @@ const Congress = ({ congress, congressNumber }) => {
             </AccordionDetails>
         </Accordion>
         <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header" >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
                 <Typography>Subommittees</Typography>
             </AccordionSummary>
             <AccordionDetails >
                 {(subcommittees.length === 0) ? (
                     <Typography>No Subcommittess</Typography>
                 ) : (
-                    <Carousel>
+                    <Carousel className={classes.carousel} >
                         {subcommittees.map((subcommittee, index) => (
                                 <Subcommittee key={index} subcommittee={subcommittee} />
                         ))}

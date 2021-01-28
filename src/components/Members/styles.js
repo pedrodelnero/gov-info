@@ -36,6 +36,12 @@ export default makeStyles((theme) => ({
             position: 'relative',
         }, 
     },
+    inputNameFilter: {
+        borderRadius: '5px',
+        marginBottom: '15px',
+        height: '30px',
+        width: '200px'
+    },
     membersGrid: {
         border: '1px solid red',
         display: 'flex',

@@ -24,10 +24,13 @@ const NavItems = [
         title: 'Committees',
         subMenu: [
             {
-                title: "Senate Committees"
+                title: "Senate"
             },
             {
-                title: "House Committees"
+                title: "House of Rep"
+            },
+            {
+                title: "Joint"
             }
         ]
     },
@@ -51,7 +54,7 @@ const Header = () => {
 
     return (
         <div className={classes.root}>
-            <Typography variant='h2' >Gov Info</Typography>
+            <Typography variant='h2' component={Link} to='/' style={{ textDecoration: 'none' }}>Gov Info</Typography>
             <div className={classes.navButtonGroup} >
                 {NavItems.map((item, index) => (
                     <div key={index} onMouseEnter={handleClick(index)} onMouseLeave={handleRequestClose(index)} className={classes.navItem}>
@@ -60,9 +63,9 @@ const Header = () => {
                             id={index}
                             open={open[index] || false}
                             anchorEl={anchorEl[index] || null}
-                            className={classes.subMenu}
+                            className={classes.popper}
                             >
-                            <Paper elevation={3} style={{ display: 'flex', flexDirection: 'column' }}>
+                            <Paper elevation={3} className={classes.subMenu} >
                                 {item.subMenu.map((subItem, subIndex) => {
                                     const selected = subItem.title.split(' ')[0].toLocaleLowerCase();
                                     // console.log(selected)
@@ -70,8 +73,7 @@ const Header = () => {
                                         <Button
                                             key={subIndex}
                                             component={Link}
-                                            to={`/${item.title.toLocaleLowerCase()}/${selected}`}
-                                            
+                                            to={`/${item.title.toLocaleLowerCase()}/${selected}`}   
                                             onClick={handleRequestClose(index)}
                                         >
                                             {subItem.title}
@@ -82,34 +84,6 @@ const Header = () => {
                         </Popper>
                     </div>
                 ))}
-                {/* <div 
-                    onMouseEnter={handleClick('members')}
-                    onMouseLeave={handleRequestClose} 
-                    style={{ border: '1px solid green', padding: '10px 0'}}
-                >
-                    <Button variant='contained' >Members</Button>
-                    <Popper
-                        id={id}
-                        open={open}
-                        anchorEl={anchorEl}
-                        className={classes.subMenu}
-                    >
-                        <Button onClick={handleRequestClose}>Senate</Button>
-                        <Button onClick={handleRequestClose}>House of Rep</Button>
-                    </Popper>
-                </div> */}
-                {/* <div component={Button} onMouseLeave={handleRequestClose} style={{ border: '1px solid green'}}>
-                    <Button onMouseEnter={handleClick('committees')} variant='contained' >Committees</Button>
-                    <Popper
-                        id={id}
-                        open={open}
-                        anchorEl={anchorEl}
-                        className={classes.subMenu}
-                    >
-                        <Button onClick={handleRequestClose}>Senate Committees</Button>
-                        <Button onClick={handleRequestClose}>House Committees</Button>
-                    </Popper>
-                </div> */}
             </div>
         </div>
     )

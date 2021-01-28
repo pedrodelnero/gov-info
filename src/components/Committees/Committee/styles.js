@@ -6,7 +6,8 @@ export default makeStyles((theme) => ({
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '150px',
+        minHeight: '250px',
+        maxWidth: '250px',
         padding: theme.spacing(1),
         margin: theme.spacing(1),
         [theme.breakpoints.down('xs')]: {

@@ -8,14 +8,14 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from './styles.js';
 
 
-const Member = ({ member: { first_name, last_name, party, id, title, state}}) => {
+const Member = ({ member: { first_name, last_name, party, id, title, state }}) => {
     const classes = useStyles();
 
     return (
-        <Paper elevation={3} className={classes.root}>
+        <Paper elevation={3} className={classes.root} >
             <Typography variant='h5'>{first_name} {last_name}</Typography>
             <Typography variant='body1'>{party} - {title} from {state}</Typography>
-            <Button component={Link} to={`/member/${id}`} >See more</Button>
+            <Button variant='outlined' component={Link} to={`/member/${id}`} className={classes.button} >See more</Button>
         </Paper>
     )
 }

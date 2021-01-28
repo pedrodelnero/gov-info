@@ -14,8 +14,10 @@ import { getOneCongressMember, getOneCongressMemberExpenses } from '../../api/me
 import Congress from './Congress/Congress';
 import Bills from './Bills/Bills';
 import MemberExpenses from './MemberExpenses/MemberExpenses';
+import useStyles from './styles.js';
 
 const MemberPage = () => {
+    const classes = useStyles();
     const { id } = useParams();
     const [memberInfo, setMemberInfo] = useState(null);
     const [congressNumber, setCongressNumber] = useState('117');
@@ -54,7 +56,7 @@ const MemberPage = () => {
             ))}
             {<Congress congress={memberInfo.roles} congressNumber={congressNumber} />}
             {<Bills congressNumber={congressNumber} memberId={id} />}
-            <Accordion>
+            <Accordion >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     <Typography>Expenses by quarter</Typography>
                 </AccordionSummary>
