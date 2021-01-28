@@ -29,20 +29,16 @@ const Members = () => {
   }, [chamber]);
 
   useEffect(() => {
-    for (let i = 0; i < members.length; i++) {
-      const fullName = `${members[i].first_name} ${members[i].last_name}`.toLocaleLowerCase();
-      if (fullName.includes(searchTerm)) return members[i]
-    }
-    // const results = members.filter(member => {
-    //   const fullName = `${member.first_name} ${member.last_name}`;
-    //   return fullName.toLocaleLowerCase().includes(searchTerm)
-    // });
+    const results = members.filter(member => {
+      const fullName = `${member.first_name} ${member.last_name}`;
+      return fullName.toLocaleLowerCase().includes(searchTerm)
+    });
     // console.log('update')
 
     // const timeOutId = setTimeout(() => setSearchResults(results), 500);
     // return () => clearTimeout(timeOutId);
 
-    // setSearchResults(results);
+    setSearchResults(results);
     
   }, [searchTerm]);
 
