@@ -6,35 +6,9 @@ import Popper from '@material-ui/core/Popper';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import NavItems from './NavItems';
 import useStyles from './styles.js';
 
-const NavItems = [
-    {
-        title: 'Members',
-        subMenu: [
-            {
-                title: "Senate"
-            },
-            {
-                title: "House of Rep"
-            }
-        ]
-    },
-    {
-        title: 'Committees',
-        subMenu: [
-            {
-                title: "Senate"
-            },
-            {
-                title: "House of Rep"
-            },
-            {
-                title: "Joint"
-            }
-        ]
-    },
-]
 
 const Header = () => {
     const classes = useStyles();
@@ -46,11 +20,7 @@ const Header = () => {
         setOpen({...open, [index]: true})
       }
 
-    const handleRequestClose = (index) => event => {
-        // event.preventDefault()
-        // console.log('click', index)
-        setOpen({...open, [index]: false})
-      }
+    const handleRequestClose = (index) => () => setOpen({...open, [index]: false});
 
     return (
         <div className={classes.root}>
@@ -58,30 +28,42 @@ const Header = () => {
             <div className={classes.navButtonGroup} >
                 {NavItems.map((item, index) => (
                     <div key={index} onMouseEnter={handleClick(index)} onMouseLeave={handleRequestClose(index)} className={classes.navItem}>
-                        <Button onClick={handleClick(index)} variant='text' endIcon={<ExpandMoreIcon />} >{item.title}</Button>
-                        <Popper
-                            id={index}
-                            open={open[index] || false}
-                            anchorEl={anchorEl[index] || null}
-                            className={classes.popper}
+                        {(item.subMenu.length === 0) ? (
+                            <Button
+                                variant='text'
+                                component={Link}
+                                to={`/${item.title.toLocaleLowerCase()}`}
+                                onClick={handleClick(index)}
                             >
-                            <Paper elevation={3} className={classes.subMenu} >
-                                {item.subMenu.map((subItem, subIndex) => {
-                                    const selected = subItem.title.split(' ')[0].toLocaleLowerCase();
-                                    // console.log(selected)
-                                    return (
-                                        <Button
-                                            key={subIndex}
-                                            component={Link}
-                                            to={`/${item.title.toLocaleLowerCase()}/${selected}`}   
-                                            onClick={handleRequestClose(index)}
-                                        >
-                                            {subItem.title}
-                                        </Button>
-                                    )
-                                })}
-                            </Paper>
-                        </Popper>
+                                {item.title
+                            }</Button>
+                        ) : (
+                            <div>
+                                <Button variant='text' onClick={handleClick(index)} endIcon={<ExpandMoreIcon />} >{item.title}</Button>
+                                <Popper
+                                    id={index}
+                                    open={open[index] || false}
+                                    anchorEl={anchorEl[index] || null}
+                                    className={classes.popper}
+                                    >
+                                    <Paper elevation={3} className={classes.subMenu} >
+                                        {item.subMenu.map((subItem, subIndex) => {
+                                            const selected = subItem.title.split(' ')[0].toLocaleLowerCase();
+                                            return (
+                                                <Button
+                                                    key={subIndex}
+                                                    component={Link}
+                                                    to={`/${item.title.toLocaleLowerCase()}/${selected}`}   
+                                                    onClick={handleRequestClose(index)}
+                                                >
+                                                    {subItem.title}
+                                                </Button>
+                                            )
+                                        })}
+                                    </Paper>
+                                </Popper>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

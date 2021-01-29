@@ -7,11 +7,12 @@ export default makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '250px',
-        maxWidth: '250px',
+        width: '250px',
         padding: theme.spacing(1),
         margin: theme.spacing(1),
         [theme.breakpoints.down('xs')]: {
-            minHeight: '210px',
+            margin: theme.spacing(0.5, 0),
+            minWidth: '100%',
         }, 
         
     },

@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { Avatar, Button, Grid } from '@material-ui/core/';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { getCommittees } from '../../api/committeesAPI';
+import useDetectOutsideClick from '../../utils/detectOutsideClick'
 import Committee from './Committee/Committee';
 import useStyles from './styles.js';
-import usHouseSeal from '../../images/us_house_seal.svg';
-import usSenateSeal from '../../images/us_senate_seal.svg';
+import { usHouseSeal, usSenateSeal} from '../../images';
+
+
+const allCongressNum = [110, 111, 112, 113, 114, 115, 116];
 
 const Committees = () => {
   const classes = useStyles();
   const { chamber } = useParams();
   const [congressNum, setCongressNum] = useState(116);
   const [committees, setCommittees] = useState([]);
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
 
-  const allCongressNum = [110, 111, 112, 113, 114, 115, 116];
+  const handleCongress = (congress) => {
+    setCongressNum(congress);
+    onClick()
+  }
+
 
   useEffect(() => {
       (async function loadCommittees() {
@@ -32,21 +41,24 @@ const Committees = () => {
 
   return (
     <div>
-      <Typography variant='h3'>Choose congress...</Typography>
-      <div>
-          {allCongressNum.map((congress, index) => (
-              <Button key={index} onClick={() => setCongressNum(congress)}>{congress}</Button>
-          ))}
+      <div style={{ width: '250px'}}>
+        <Button
+          onClick={onClick}
+          endIcon={(isActive ? <ExpandLessIcon /> : <ExpandMoreIcon />)}
+          className={classes.trigger}
+        >
+          Choose congress... ({congressNum})
+        </Button>
+      </div>
+      <div ref={dropdownRef} className={(isActive ? classes.menuActive : classes.menuInactive)}>
+        {allCongressNum.map((congress, index) => (
+            <Button key={index} onClick={() => handleCongress(congress)}>{congress}</Button>
+        ))}
       </div>
       {(chamber === 'senate') && (
         <div className={classes.pageHeader} >
           <div className={classes.pageHeaderButtons} >
-            <Button
-              startIcon={<Avatar src={usHouseSeal} />}
-              component={Link}
-              to='/committees/house'
-              className={classes.pageHeaderButton}
-            >
+            <Button startIcon={<Avatar src={usHouseSeal} />} component={Link} to='/committees/house'className={classes.pageHeaderButton} >
               See House Committees
             </Button>
             <Button
@@ -65,12 +77,7 @@ const Committees = () => {
       {(chamber === 'house') && (
         <div className={classes.pageHeader} >
           <div className={classes.pageHeaderButtons} >
-            <Button
-              startIcon={<Avatar src={usSenateSeal} />}
-              component={Link}
-              to='/committees/senate'
-              className={classes.pageHeaderButton}
-            >
+            <Button startIcon={<Avatar src={usSenateSeal} />} component={Link} to='/committees/senate' className={classes.pageHeaderButton}>
               See Senate Committees
             </Button>
             <Button
@@ -89,20 +96,10 @@ const Committees = () => {
       {(chamber === 'joint') && (
         <div className={classes.pageHeaderJoint} >
           <div>
-            <Button
-              startIcon={<Avatar src={usSenateSeal} />}
-              component={Link}
-              to='/committees/senate'
-              className={classes.pageHeaderButton}
-            >
+            <Button startIcon={<Avatar src={usSenateSeal} />} component={Link} to='/committees/senate' className={classes.pageHeaderButton}>
               See Senate Committees
             </Button>
-            <Button
-              startIcon={<Avatar src={usHouseSeal} />}
-              component={Link}
-              to='/committees/house'
-              className={classes.pageHeaderButton}
-            >
+            <Button startIcon={<Avatar src={usHouseSeal} />} component={Link} to='/committees/house' className={classes.pageHeaderButton}>
               See House Committees
             </Button>
           </div>
@@ -115,7 +112,7 @@ const Committees = () => {
 
       <Grid container className={classes.committeesGrid} >
         {(committees.length !== 0) && committees.map((committee, index) => (
-            <Grid item key={index}>
+            <Grid item key={index}  className={classes.committeesGridItem} >
                 <Committee committee={committee} congress={congressNum} />
             </Grid>
         ))}

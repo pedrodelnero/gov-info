@@ -1,10 +1,35 @@
 import { makeStyles } from '@material-ui/core/styles';
+// import zIndex from '@material-ui/core/styles/zIndex';
 
 export default makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
         minWidth: '100%',   
+    },
+    trigger: {
+        width: '100%',
+        '&:hover': {
+            boxShadow: '0 1px 8px rgba(0, 0, 0, 0.3);'
+        }
+    },
+    menuActive: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        // border: '1px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '250px',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
+        zIndex: 1,
+        "& .MuiButtonBase-root": {
+            borderBottom: '1px solid grey'
+        }
+    },
+    menuInactive: {
+        display: 'none'
+
     },
     pageHeader: {
         display: 'flex',
@@ -21,7 +46,8 @@ export default makeStyles((theme) => ({
         flexDirection: 'column'
     },
     pageHeaderButton: {
-        maxHeight: '55px'
+        maxHeight: '55px',
+        justifyContent: 'flex-start'
     },
     pageHeaderImage: {
         width: '300px',
@@ -70,6 +96,11 @@ export default makeStyles((theme) => ({
     committeesGrid: {
         // border: '1px solid red',
         display: 'flex',
-        justifyContent: 'center'
-    }
+        justifyContent: 'center',
+    },
+    committeesGridItem: {
+        [theme.breakpoints.down('xs')]: {
+            width: '100%'   
+        }, 
+    },
 }));

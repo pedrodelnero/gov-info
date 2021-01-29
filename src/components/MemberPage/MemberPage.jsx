@@ -14,10 +14,12 @@ import { getOneCongressMember, getOneCongressMemberExpenses } from '../../api/me
 import Congress from './Congress/Congress';
 import Bills from './Bills/Bills';
 import MemberExpenses from './MemberExpenses/MemberExpenses';
-import useStyles from './styles.js';
+// import useStyles from './styles.js';
+
+const years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
 
 const MemberPage = () => {
-    const classes = useStyles();
+    // const classes = useStyles();
     const { id } = useParams();
     const [memberInfo, setMemberInfo] = useState(null);
     const [congressNumber, setCongressNumber] = useState('117');
@@ -26,7 +28,6 @@ const MemberPage = () => {
     const [expenseQuarter, setExpenseQuarter] = useState(1);
     const [memberExpenses, setMemberExpenses] = useState([]);
 
-    const years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
 
     useEffect(() => {
         (async function loadMember () {
@@ -34,7 +35,9 @@ const MemberPage = () => {
             console.log(data)
             setMemberInfo(data)
         })();
-
+    }, [id])
+    
+    useEffect(() => {
         (async function getExpense () {
             const data = await getOneCongressMemberExpenses(id, expenseYear, expenseQuarter);
             setMemberExpenses(data)
