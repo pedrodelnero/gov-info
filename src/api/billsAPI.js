@@ -9,6 +9,13 @@ const committeesAPI = axios.create({
   });
 
 
+
+
+export const getRecentBills = async (congress, chamber) => {
+    const { data: { results } } = await committeesAPI.get(`/${congress}/senate/bills/vetoed.json`);
+    return results[0]
+}
+
 export const getSpecificBill = async (congress, billId) => {
     const { data: { results } } = await committeesAPI.get(`/${congress}/bills/${billId}.json`);
     return results[0]

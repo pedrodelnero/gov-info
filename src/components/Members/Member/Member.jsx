@@ -1,23 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-// import theme from '../../../router/theme';
 
-import useStyles from './styles.js';
+import './member.css';
 
 
-const Member = ({ member: { first_name, last_name, party, id, title, state }}) => {
-    const classes = useStyles();
+const Member = ({ member: { first_name, last_name, party, id, title, state }}) => (
+    <div className='member-root' >
+        <h2 className='member-name' >{first_name} {last_name}</h2>
+        <p className='member-info' >{party} - {title} from {state}</p>
+        <div className='member-button' >
+            <Link to={`/member/${id}`}  >See more</Link>
+        </div>
+    </div>
 
-    return (
-        <Paper elevation={3} className={classes.root} >
-            <Typography variant='h5'>{first_name} {last_name}</Typography>
-            <Typography variant='body1'>{party} - {title} from {state}</Typography>
-            <Button variant='outlined' component={Link} to={`/member/${id}`} className={classes.button} >See more</Button>
-        </Paper>
-    )
-}
+);
 
 export default Member;

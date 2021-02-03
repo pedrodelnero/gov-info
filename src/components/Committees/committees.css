@@ -1,0 +1,138 @@
+.committees-root {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+}
+
+.page-header {
+    flex-direction: column;
+    /* align-items: center; */
+    min-height: 300px;
+    /* border: 1px solid red; */
+}
+
+.dropdown-menu {
+    /* border: 1px solid green; */
+    width: 250px;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.dropdown-menu-trigger {
+    border: 1px solid blue;
+    height: 100%;
+}
+.dropdown-menu-trigger > button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.dropdown-menu-trigger > button:hover {
+    background-color: #f9f9f9;
+}
+.dropdown-menu-trigger > button > p {
+    font-size: 16px;
+}
+
+.dropdown-menu-trigger > button > svg {
+    height: 25px;
+    width: 25px;
+}
+
+.page-header-buttons {
+    /* border: 1px solid purple; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    position: relative;
+    /* width: auto; */
+}
+
+.page-header-button {
+    display: flex;
+    flex-direction: column;
+    max-height: 55px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    /* border: 1px solid red; */
+}
+
+.page-header-button:hover {
+    background-color: #f9f9f9;
+}
+
+.page-header-button > a {
+    align-items: center;
+    display: flex;
+}
+
+.page-header-button > a > p {
+    margin: 0 10px;
+}
+
+.page-header-button > a > img {
+    height: 40px;
+    width: 40px;
+}
+
+.page-header-image {
+    /* border: 1px solid cyan; */
+    height: 200px;
+    position: relative;
+    width: 200px;
+}
+
+.input-name-filter {
+    width: auto;
+}
+
+.input-name-filter > input {
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    width: 200px;
+}
+
+.members-grid {
+    /* border: 1px solid purple; */
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    width: 100%;
+}
+
+@media only screen and (min-width : 420px) {
+    .page-header {
+        border: 1px solid cyan;
+        /* align-items: flex-start; */
+        min-height: 330px;
+    }
+
+    .page-header-image {
+        height: 300px;
+        position: absolute;
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -30px;
+    }
+
+    .input-name-filter {
+        width: 100%;
+    }
+
+    .members-grid {
+        /* border: 1px solid purple; */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+}

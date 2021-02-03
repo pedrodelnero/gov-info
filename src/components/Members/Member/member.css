@@ -1,0 +1,41 @@
+.member-root {
+    border-radius: 5px;
+    box-shadow: -1px 0.5px 5px grey;
+    box-sizing: border-box;
+    max-width: 150px;
+    min-height: 210px;
+    padding: 5px 8px;
+    position: relative;
+}
+
+.member-name,
+.member-info {
+    margin: 5px 0;
+}
+
+
+.member-button {
+    bottom: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: block;
+    left: 0;
+    margin: 0 10px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: auto;
+}
+
+@media only screen and (min-width : 420px) {
+    .member-root {
+        min-height: 150px;
+        min-width: 280px;
+    }
+
+    .member-button {
+        width: 130px
+    }
+
+}

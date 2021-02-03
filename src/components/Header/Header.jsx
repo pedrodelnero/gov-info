@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { NavLink } from 'react-router-dom';
+import { MdExpandMore } from 'react-icons/md';
 
 import NavItems from './NavItems';
-import useStyles from './styles.js';
+import './header.css'
 
 
 const Header = () => {
-    const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState([]);
     const [open, setOpen] = useState([]);
 
@@ -23,46 +18,37 @@ const Header = () => {
     const handleRequestClose = (index) => () => setOpen({...open, [index]: false});
 
     return (
-        <div className={classes.root}>
-            <Typography variant='h2' component={Link} to='/' style={{ textDecoration: 'none' }}>Gov Info</Typography>
-            <div className={classes.navButtonGroup} >
+        <div className='root'>
+            <h2 className='header-title' ><NavLink to='/' >Gov Info</NavLink></h2>
+            <div className='nav-group' >
                 {NavItems.map((item, index) => (
-                    <div key={index} onMouseEnter={handleClick(index)} onMouseLeave={handleRequestClose(index)} className={classes.navItem}>
+                    <div key={index} onMouseEnter={handleClick(index)} onMouseLeave={handleRequestClose(index)} className='nav-item' >
                         {(item.subMenu.length === 0) ? (
-                            <Button
-                                variant='text'
-                                component={Link}
-                                to={`/${item.title.toLocaleLowerCase()}`}
-                                onClick={handleClick(index)}
-                            >
-                                {item.title
-                            }</Button>
+                            <div className='nav-link' >
+                                <NavLink to={`/${item.title.toLocaleLowerCase()}`} >
+                                    {item.title}                                    
+                                </NavLink>
+
+                            </div>
                         ) : (
-                            <div>
-                                <Button variant='text' onClick={handleClick(index)} endIcon={<ExpandMoreIcon />} >{item.title}</Button>
-                                <Popper
-                                    id={index}
-                                    open={open[index] || false}
-                                    anchorEl={anchorEl[index] || null}
-                                    className={classes.popper}
-                                    >
-                                    <Paper elevation={3} className={classes.subMenu} >
+                            <button onClick={handleClick(index)} className='nav-dropdown' >
+                                {item.title}
+                                <MdExpandMore className='button-icon' />
+                                {open[index] && (
+                                    <div className='sub-menu' >
                                         {item.subMenu.map((subItem, subIndex) => {
                                             const selected = subItem.title.split(' ')[0].toLocaleLowerCase();
                                             return (
-                                                <Button
-                                                    key={subIndex}
-                                                    component={Link}
-                                                    to={`/${item.title.toLocaleLowerCase()}/${selected}`}   
-                                                    onClick={handleRequestClose(index)}
-                                                >
-                                                    {subItem.title}
-                                                </Button>
+                                                <NavLink key={subIndex} to={`/${item.title.toLocaleLowerCase()}/${selected}`} >
+                                                    <button onClick={handleRequestClose(index)}>
+                                                        {subItem.title}   
+                                                    </button>
+                                                </NavLink>
                                             )
                                         })}
-                                    </Paper>
-                                </Popper>
-                            </div>
+                                    </div>
+                                )}
+                            </button>
                         )}
                     </div>
                 ))}

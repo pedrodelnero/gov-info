@@ -8,29 +8,38 @@ export default makeStyles((theme) => ({
         minWidth: '100%',   
     },
     trigger: {
+        border: '1px solid red',
         width: '100%',
         '&:hover': {
             boxShadow: '0 1px 8px rgba(0, 0, 0, 0.3);'
         }
     },
-    menuActive: {
-        position: 'absolute',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        // border: '1px solid black',
+    menu: {
         display: 'flex',
         flexDirection: 'column',
+        background: '#ffffff',
+        borderRadius: '8px',
+        position: 'absolute',
         width: '250px',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0 1px 8px rgba(0, 0, 0, 0.3)',
+        opacity: 0,
+        visibility: 'hidden',
+        transform: 'translateY(-20px)',
+        transition: 'opacity 0.4s ease, transform 0.4s ease, visibility 0.4s',
         zIndex: 1,
         "& .MuiButtonBase-root": {
             borderBottom: '1px solid grey'
         }
     },
-    menuInactive: {
-        display: 'none'
-
+    menuActive: {
+        opacity: 1,
+        visibility: 'visible',
+        transform: 'translateY(0)',
     },
+    // menuInactive: {
+    //     display: 'none'
+
+    // },
     pageHeader: {
         display: 'flex',
         justifyContent: 'flex-start',
