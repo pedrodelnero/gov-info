@@ -2,7 +2,7 @@
     border-radius: 5px;
     box-shadow: -1px 0.5px 5px grey;
     box-sizing: border-box;
-    max-width: 150px;
+    min-width: 100%;
     min-height: 210px;
     padding: 5px 8px;
     position: relative;
@@ -31,7 +31,7 @@
 @media only screen and (min-width : 420px) {
     .committee-root {
         /* min-height: 150px; */
-        min-width: 280px;
+        width: 320px;
     }
 
     .committee-button {

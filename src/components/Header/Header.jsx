@@ -18,7 +18,7 @@ const Header = () => {
     const handleRequestClose = (index) => () => setOpen({...open, [index]: false});
 
     return (
-        <div className='root'>
+        <div className='header-root'>
             <h2 className='header-title' ><NavLink to='/' >Gov Info</NavLink></h2>
             <div className='nav-group' >
                 {NavItems.map((item, index) => (

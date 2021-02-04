@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-// import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
 // import CircularProgress from '@material-ui/core/CircularProgress';
+import { MdExpandLess, MdExpandMore } from 'react-icons/md';
+// import { MdExpandLess, MdExpandMore, MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 import Committee from './Committee/Committee';
 import Subcommittee from './Subcommittee/Subcommittee';
 import useStyles from './styles.js';
+import './congress.css';
 
 
 const Congress = ({ congress, congressNumber }) => {
@@ -20,6 +17,9 @@ const Congress = ({ congress, congressNumber }) => {
     const [totalVotes, setTotalVotes] = useState(null);
     const [missedVotes, setMiseedVotes] = useState(null);
     const [chamber, setChamber] = useState(null);
+    const [isVotesOpen, setIsVotesOpen] = useState(false);
+    const [isCommitteesOpen, setIsCommitteesOpen] = useState(false);
+    const [isSubcommitteesOpen, setIsSubcommitteesOpen] = useState(false);
 
     useEffect(() => {
         const selectedCongress = congress.filter((role) => role.congress === congressNumber)
@@ -34,26 +34,27 @@ const Congress = ({ congress, congressNumber }) => {
     // if (!selectedCongress) return <CircularProgress />
 
   return (
-    <div>
-        <Typography variant='h5'>{congress.chamber}</Typography>
-        <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
-                <Typography>Member Votes</Typography>
-            </AccordionSummary>
-            <AccordionDetails >
-                <div styles={{ display: 'flex', flexDirecton: 'column' }}>
-                    <Typography variant='body1'>Total votes: {totalVotes}</Typography>
-                    <Typography variant='body1'>Missed votes: {missedVotes}</Typography>
-                </div>
-            </AccordionDetails>
-        </Accordion>
-        <Accordion className={classes.accordion} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
-                <Typography >Committees</Typography>
-            </AccordionSummary>
-            <AccordionDetails >
+    <div className='member-congress-root'>
+        <div className='member-congress-info' >
+            <button className='member-congress-info-header' onClick={() => setIsVotesOpen(!isVotesOpen)} >
+                <h3>Member Votes</h3>
+                {isVotesOpen ? <MdExpandLess /> : <MdExpandMore />}
+            </button>
+            <div className={'member-congress-info-details votes ' + (isVotesOpen ? 'active' : 'inactive')} >
+                {/* <MdKeyboardArrowLeft /> */}
+                <p>Total votes: {totalVotes}</p>
+                <p>Missed votes: {missedVotes}</p>
+                {/* <MdKeyboardArrowRight /> */}
+            </div>
+        </div>
+        <div className='member-congress-info' >
+            <button className='member-congress-info-header' onClick={() => setIsCommitteesOpen(!isCommitteesOpen)} >
+                <h3>Committees</h3>
+                {isCommitteesOpen ? <MdExpandLess /> : <MdExpandMore />}
+            </button>
+            <div className={'member-congress-info-details ' + (isCommitteesOpen ? 'active' : 'inactive')}   >
                 {(committees.length === 0) ? (
-                    <Typography>No Committess</Typography>
+                    <h2 className='no-details' >No Committess</h2>
                 ) : (
                     <Carousel className={classes.carousel} >
                         {committees.map((committee, index) => (
@@ -61,24 +62,25 @@ const Congress = ({ congress, congressNumber }) => {
                         ))}
                     </Carousel>
                 )}
-            </AccordionDetails>
-        </Accordion>
-        <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.accordionHeader} >
-                <Typography>Subommittees</Typography>
-            </AccordionSummary>
-            <AccordionDetails >
+            </div>
+        </div>
+        <div className='member-congress-info' >
+            <button className='member-congress-info-header' onClick={() => setIsSubcommitteesOpen(!isSubcommitteesOpen)} >
+                <h3>Subcommittees</h3>
+                {isSubcommitteesOpen ? <MdExpandLess /> : <MdExpandMore />}
+            </button>
+            <div className={'member-congress-info-details ' + (isSubcommitteesOpen ? 'active' : 'inactive')}   >
                 {(subcommittees.length === 0) ? (
-                    <Typography>No Subcommittess</Typography>
+                    <h2 className='no-details' >No Subcommittees</h2>
                 ) : (
                     <Carousel className={classes.carousel} >
                         {subcommittees.map((subcommittee, index) => (
-                                <Subcommittee key={index} subcommittee={subcommittee} />
+                                <Subcommittee key={index} subcommittee={subcommittee}  />
                         ))}
                     </Carousel>
                 )}
-            </AccordionDetails>
-        </Accordion>
+            </div>
+        </div>
     </div>
   );
 }

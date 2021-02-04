@@ -34,25 +34,25 @@ const Members = () => {
   return (
     <div className='members-root' >
       {(chamber === 'senate') ? (
-        <div className='page-header' >
-          <div className='page-header-button' >
+        <div className='members-header' >
+          <div className='members-header-button' >
             <Link to='/members/house' >
-                <p>See House of Rep Members</p>
                 <img src={usHouseSeal} alt='US Senate Seal' />
+                <p>See House of Rep Members</p>
             </Link>
           </div>
-          <img src={usSenateSeal} alt='US Senate Seal' className='page-header-image' />
+          <img src={usSenateSeal} alt='US Senate Seal' className='members-header-image' />
         </div>
 
       ) : (
-        <div className='page-header' >
-          <div className='page-header-button' >
+        <div className='members-header' >
+          <div className='members-header-button' >
             <Link to='/members/senate' >
-                <p>See Senate Members</p>
                 <img src={usSenateSeal} alt='US Senate Seal' />
+                <p>See Senate Members</p>
             </Link>
           </div>
-          <img src={usHouseSeal} alt='US House of Rep Seal' className='page-header-image' />
+          <img src={usHouseSeal} alt='US House of Rep Seal' className='members-header-image' />
         </div>
       )}
       <div className='input-name-filter' >

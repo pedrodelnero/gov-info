@@ -1,4 +1,4 @@
-.root {
+.header-root {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +75,7 @@
 }
 
 @media only screen and (min-width : 420px) {
-    .root {
+    .header-root {
         justify-content: space-between;;
         /* border: 1px solid red */
     }

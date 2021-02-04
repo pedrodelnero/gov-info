@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import { Header, HomePage, Members, MemberPage, Bills, BillPage, Committees, CommitteePage } from '../components';
 import theme from './theme';
+import './app.css';
 
 const App = () => {
 
@@ -11,7 +12,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Header />
-        <div style={{ minHeight: '100vh' }}>
+        <div className='app-body'>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/members/:chamber" component={Members} />

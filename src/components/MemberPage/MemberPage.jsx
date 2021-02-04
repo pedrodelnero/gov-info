@@ -52,10 +52,10 @@ const MemberPage = () => {
 
     return (
         <div>
-            <Typography variant='h3'>{memberInfo.first_name} {memberInfo.last_name}</Typography>
-            <Typography>Role in congress</Typography>
+            <h1>{memberInfo.first_name} {memberInfo.last_name}</h1>
+            <h2>Role in congress</h2>
             {memberInfo.roles.map((role, index) => (
-                <Button key={index} onClick={(e) => setCongressNumber(e.currentTarget.value)} value={role.congress} >{role.congress}</Button>
+                <button key={index} onClick={(e) => setCongressNumber(e.currentTarget.value)} value={role.congress} >{role.congress}</button>
             ))}
             {<Congress congress={memberInfo.roles} congressNumber={congressNumber} />}
             {<Bills congressNumber={congressNumber} memberId={id} />}

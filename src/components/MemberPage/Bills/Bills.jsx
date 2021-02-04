@@ -1,47 +1,43 @@
 import React, { useEffect, useState } from 'react';
-// import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Carousel from 'react-material-ui-carousel'
+import { MdExpandLess, MdExpandMore } from 'react-icons/md';
+// import { MdExpandLess, MdExpandMore, MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 import { getBillCosponsoredByOneMember } from '../../../api/membersAPI';
 import Bill from './Bill/Bill';
+import './bills.css'
 
 
 const Bills = ({ congressNumber, memberId }) => {
     const [bills, setBills] = useState([]);
+    const [isBillsOpen, setIsBillsOpen] = useState(false)
 
     useEffect(() => {
         (async function getBills () {
             const data = await getBillCosponsoredByOneMember(memberId);
             const selectedBills = data.filter((dataPoint) => dataPoint.congress === congressNumber);
-            // console.log('selectedBills', selectedBills)
             setBills(selectedBills)
 
         })();
     }, [congressNumber, memberId])
     
   return (
-    <div>
-        <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-                <Typography>Bills cosponsored</Typography>
-            </AccordionSummary>
-            <AccordionDetails >
-                {(bills.length === 0) ? (
-                    <Typography>No Bills</Typography>
-                ) : (
-                    <Carousel>
-                        {bills.map((bill, index) => (
-                            <Bill bill={bill} key={index} congressNumber={congressNumber} />
-                        ))}
-                    </Carousel>
-                )}
-            </AccordionDetails>
-        </Accordion>
+    <div className='member-bills-root'>
+        <button className='member-bills-info-header' onClick={() => setIsBillsOpen(!isBillsOpen)} >
+            <h3>Bills cosponsored</h3>
+            {isBillsOpen ? <MdExpandLess /> : <MdExpandMore />}
+        </button>
+        <div className={'member-bills-info-details ' + (isBillsOpen ? 'bill-active' : 'bill-inactive')} >
+            {(bills.length === 0) ? (
+                <h2 className='no-details' >No Bills</h2>
+            ) : (
+                <Carousel>
+                    {bills.map((bill, index) => (
+                        <Bill bill={bill} key={index} congressNumber={congressNumber} />
+                    ))}
+                </Carousel>
+            )}
+        </div>
     </div>
   );
 }

@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+
+import './bill.css';
 
 
-const Bill = ({ bill, congressNumber }) => {
-    const [billId, setBillId] = useState('');
-
-    useEffect(() => {
-        const splitBillId = bill.bill_id.split('-');
-        // console.log(selStr)
-        setBillId(splitBillId[0])
-       
-    }, [bill])
-    
-  return (
-    // <div >
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}> 
-        <Typography>{bill.short_title}</Typography>
-        <Typography>{bill.number}</Typography>
-        <Typography>{bill.committees}</Typography>
-        <Button component={Link} to={`/bill/${congressNumber}/${billId}`}>See bill</Button>
+const Bill = ({ bill: { bill_id, short_title, number, committees}, congressNumber }) => (
+  <div className='member-bill-root' > 
+    <div className='member-bill-info' >
+        <h3>{short_title}</h3>
+        <p>{number}</p>
+        <p>{committees}</p>
     </div>
-  );
-}
+    <div className='member-bill-link' >
+        <Link to={`/bill/${congressNumber}/${bill_id.split('-')[0]}`}>See bill</Link>
+    </div>
+  </div>
+
+);
 
 export default Bill;
